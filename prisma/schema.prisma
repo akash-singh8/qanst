@@ -11,15 +11,27 @@ datasource db {
 }
 
 model User {
-  email      String @id
+  email      String     @id
   name       String
   pictureUrl String
   forms      Form[]
+  questions  Question[]
 }
 
 model Form {
-  fid       String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  host      User     @relation(fields: [hostId], references: [email])
+  fid       String     @id @default(uuid())
+  createdAt DateTime   @default(now())
+  host      User       @relation(fields: [hostId], references: [email])
   hostId    String
+  questions Question[]
+}
+
+model Question {
+  qid       String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  content   String
+  form      Form     @relation(fields: [formId], references: [fid])
+  formId    String
+  user      User     @relation(fields: [userId], references: [email])
+  userId    String
 }
