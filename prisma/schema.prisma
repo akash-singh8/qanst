@@ -17,6 +17,7 @@ model User {
   forms      Form[]
   questions  Question[]
   votes      Vote[]
+  answers    Answer[]
 }
 
 model Form {
@@ -36,6 +37,7 @@ model Question {
   user      User     @relation(fields: [userId], references: [email])
   userId    String
   votes     Vote[]
+  answers   Answer[]
 }
 
 model Vote {
@@ -46,4 +48,14 @@ model Vote {
   questionId String
 
   @@unique([userId, questionId])
+}
+
+model Answer {
+  ansId      String   @id @default(uuid())
+  createdAt  DateTime @default(now())
+  content    String
+  user       User     @relation(fields: [userId], references: [email])
+  userId     String
+  question   Question @relation(fields: [questionId], references: [qid])
+  questionId String
 }
