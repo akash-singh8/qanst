@@ -11,6 +11,17 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+main {
+  background-color: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.04);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 22px auto;
+  min-height: calc(100vh - 242px);
+  max-width: 880px;
+  width: 90vw;
+}
+
 .button {
   background: linear-gradient(
     90deg,
