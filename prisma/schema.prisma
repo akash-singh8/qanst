@@ -16,6 +16,7 @@ model User {
   pictureUrl String
   forms      Form[]
   questions  Question[]
+  votes      Vote[]
 }
 
 model Form {
@@ -34,4 +35,15 @@ model Question {
   formId    String
   user      User     @relation(fields: [userId], references: [email])
   userId    String
+  votes     Vote[]
+}
+
+model Vote {
+  vid        String   @id @default(uuid())
+  user       User     @relation(fields: [userId], references: [email])
+  userId     String
+  question   Question @relation(fields: [questionId], references: [qid])
+  questionId String
+
+  @@unique([userId, questionId])
 }
