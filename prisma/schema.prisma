@@ -14,4 +14,12 @@ model User {
   email      String @id
   name       String
   pictureUrl String
+  forms      Form[]
+}
+
+model Form {
+  fid       String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  host      User     @relation(fields: [hostId], references: [email])
+  hostId    String
 }
