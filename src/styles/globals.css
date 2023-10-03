@@ -10,3 +10,34 @@ body {
   background-color: #f8f8f8;
   font-family: "Roboto", sans-serif;
 }
+
+.button {
+  background: linear-gradient(
+    90deg,
+    rgba(241, 105, 82, 0.9) 0%,
+    rgba(209, 73, 229, 0.9) 100%
+  );
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  letter-spacing: 1.1px;
+  padding: 9px 26px;
+  transition: all 0.22s ease-in-out;
+}
+
+.button:hover {
+  background: linear-gradient(
+    270deg,
+    rgba(241, 105, 82, 0.95) 0%,
+    rgba(209, 73, 229, 0.95) 100%
+  );
+  opacity: 0.85;
+}
+
+.button:active {
+  opacity: 0.7;
+}
