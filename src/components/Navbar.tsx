@@ -1,8 +1,13 @@
 import style from "@/styles/Navbar.module.css";
 import { useSession, signIn, signOut } from "next-auth/react";
+import authState from "@/recoil/auth";
+import { useSetRecoilState } from "recoil";
 
 const Navbar = () => {
   const session = useSession();
+
+  const setAuth = useSetRecoilState(authState);
+  setAuth(session.data !== null);
 
   console.log("=== Inside Navbar === ");
   console.log(session);
