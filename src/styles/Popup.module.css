@@ -56,3 +56,33 @@
   right: 12px;
   width: 16px;
 }
+
+@keyframes fadeIn {
+  from {
+    margin-bottom: -60px;
+    opacity: 0;
+  }
+  to {
+    margin-bottom: 0px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    margin-bottom: 0px;
+    opacity: 1;
+  }
+  to {
+    margin-bottom: -60px;
+    opacity: 0;
+  }
+}
+
+.fadein {
+  animation: fadeIn 0.2s ease-out 1;
+}
+
+.fadeout {
+  animation: fadeOut 0.2s ease-in 1;
+}

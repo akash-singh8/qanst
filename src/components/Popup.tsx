@@ -8,9 +8,15 @@ const Popup = () => {
 
   useEffect(() => {
     const cross = document.querySelector(`.${style.cross}`);
+    const popup = document.querySelector(`.${style.popup}`);
+
+    popup?.classList.add(style.fadein);
 
     function clickHandler() {
-      setPopup(false);
+      popup?.classList.add(style.fadeout);
+      setTimeout(() => {
+        setPopup(false);
+      }, 200);
       cross?.removeEventListener("click", clickHandler);
     }
 
