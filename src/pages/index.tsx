@@ -1,6 +1,11 @@
 import style from "@/styles/Home.module.css";
+import { useRecoilValue } from "recoil";
+import authState from "@/recoil/auth";
+import { signIn } from "next-auth/react";
 
 export default function Home() {
+  const auth = useRecoilValue(authState);
+
   return (
     <main className={style.home}>
       <div className={style.detail}>
@@ -11,12 +16,29 @@ export default function Home() {
           form creation, and shared insights.
         </p>
 
-        <button className="button">
-          Get started <span>&#10230;</span>
-        </button>
+        {auth ? (
+          <div className={style.auth}>
+            <button className={`button ${style.button}`}>Host QnA</button>
+
+            <p>--- or ---</p>
+
+            <div className={style.join}>
+              <input type="text" placeholder="Enter id to join QnA" />
+              <button>join</button>
+            </div>
+          </div>
+        ) : (
+          <button
+            className={`button ${style.button}`}
+            onClick={() => {
+              signIn();
+            }}>
+            Get started <span>&#10230;</span>
+          </button>
+        )}
       </div>
 
-      <img src="/home.png" alt="home" />
+      <img src="/home.png" alt="home" className={auth ? style.image : ""} />
     </main>
   );
 }
