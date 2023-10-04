@@ -1,15 +1,17 @@
 import style from "@/styles/Home.module.css";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 import authState from "@/recoil/auth";
+import popState from "@/recoil/popup";
 import { signIn } from "next-auth/react";
 import Popup from "@/components/Popup";
 
 export default function Home() {
   const auth = useRecoilValue(authState);
+  const [popup, setPopup] = useRecoilState(popState);
 
   return (
     <>
-      <Popup />
+      {popup ? <Popup /> : <></>}
       <main className={style.home}>
         <div className={style.detail}>
           <h1>Transform Questions into Conversations</h1>
@@ -21,7 +23,13 @@ export default function Home() {
 
           {auth ? (
             <div className={style.auth}>
-              <button className={`button ${style.button}`}>Host QnA</button>
+              <button
+                className={`button ${style.button}`}
+                onClick={() => {
+                  setPopup(true);
+                }}>
+                Host QnA
+              </button>
 
               <p>--- or ---</p>
 

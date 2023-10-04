@@ -1,7 +1,7 @@
 .popup {
   align-items: center;
   background-color: rgba(203, 203, 203, 0.36);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(3px);
   display: flex;
   justify-content: center;
   position: fixed;
@@ -9,6 +9,7 @@
   bottom: 0;
   right: 0;
   left: 0;
+  z-index: 10;
 }
 
 .container {
@@ -19,12 +20,13 @@
   display: flex;
   flex-direction: column;
   font-size: 20px;
+  position: relative;
   padding: 32px 10px;
   max-width: 440px;
   width: 80vw;
 }
 
-.container img {
+.form {
   width: 170px;
 }
 
@@ -45,4 +47,12 @@
 
 .title::placeholder {
   color: #c6c6c6;
+}
+
+.cross {
+  cursor: pointer;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 16px;
 }
