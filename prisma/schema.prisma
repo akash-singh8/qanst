@@ -23,6 +23,7 @@ model User {
 model Form {
   fid       String     @id @default(uuid())
   createdAt DateTime   @default(now())
+  title     String     @default("QnA")
   host      User       @relation(fields: [hostId], references: [email])
   hostId    String
   questions Question[]
