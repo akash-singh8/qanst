@@ -1,18 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next/types";
 import userSchema from "@/validation/user";
-import authenticate from "@/middleware/authenticate";
 import { PrismaClient } from "@prisma/client";
 export const prisma = new PrismaClient();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-    const user = await authenticate(req, res);
-
-    const isValidData = userSchema.safeParse({
-      name: user?.name,
-      email: user?.email,
-      pictureUrl: user?.image,
-    });
+    // Exploit: anyone with the next-auth session token can easily fuck database
+    const isValidData = userSchema.safeParse(req.body);
 
     if (!isValidData.success) {
       return res.status(400).json({

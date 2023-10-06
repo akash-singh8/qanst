@@ -13,4 +13,4 @@ export default withAuth(
   }
 );
 
-export const config = { matcher: ["/api/auth", "/api/qna", "/api/hello"] };
+export const config = { matcher: ["/api/user", "/api/qna", "/api/hello"] };
