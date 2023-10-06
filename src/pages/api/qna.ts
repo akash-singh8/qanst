@@ -1,26 +1,28 @@
 import { NextApiRequest, NextApiResponse } from "next/types";
-import authenticate from "@/middleware/authenticate";
 import validateUUID from "@/validation/uuid";
-import { prisma } from "./auth";
+import validateForm from "@/validation/form";
+import { prisma } from "./user";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-    const user = await authenticate(req, res);
-    const email = user?.email;
+    // Vulnerable
+    const isValidForm = validateForm.safeParse(req.body);
 
-    if (!email) {
-      return res.status(404).json({ message: "Email not found" });
+    if (!isValidForm.success) {
+      return res.status(400).json({ message: "Invalid request" });
     }
 
     try {
       const newForm = await prisma.form.create({
         data: {
-          hostId: email,
+          hostId: isValidForm.data.email,
+          title: isValidForm.data.title,
         },
       });
 
       res.status(201).json({ formId: newForm.fid });
     } catch (err) {
+      console.log(err);
       res.status(500).json({ message: "Internal server error" });
     }
 
