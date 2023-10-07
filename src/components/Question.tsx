@@ -1,6 +1,10 @@
 import style from "@/styles/Question.module.css";
+import { useRecoilValue } from "recoil";
+import userState from "@/recoil/user";
+import { useState } from "react";
 
 type QueData = {
+  id: string;
   content: string;
   user: any;
   answers: any;
@@ -8,7 +12,31 @@ type QueData = {
   votes: number;
 };
 
-const Question = ({ content, user, answers, date, votes }: QueData) => {
+const Question = ({ id, content, user, answers, date, votes }: QueData) => {
+  const [answer, setAnswer] = useState("");
+  const currUser = useRecoilValue(userState);
+
+  const postAnswer = async () => {
+    const post = await fetch("http://localhost:3000/api/answer", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        answer: answer,
+        questionId: id,
+        userId: currUser.email,
+      }),
+    });
+
+    if (post.status !== 201) {
+      const data = await post.json();
+      alert(data.message);
+    }
+
+    setAnswer("");
+  };
+
   return (
     <div className={style.question}>
       <img src={user?.pictureUrl} alt="temp" className={style.pic} />
@@ -31,8 +59,15 @@ const Question = ({ content, user, answers, date, votes }: QueData) => {
       </div>
 
       <div className={style.ans_input}>
-        <input type="text" placeholder="write a answer..." />
-        <button>post</button>
+        <input
+          type="text"
+          placeholder="write a answer..."
+          value={answer}
+          onChange={(e) => {
+            setAnswer(e.target.value);
+          }}
+        />
+        <button onClick={postAnswer}>post</button>
       </div>
     </div>
   );

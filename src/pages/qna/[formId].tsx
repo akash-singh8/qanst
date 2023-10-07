@@ -69,6 +69,7 @@ const Form = () => {
               {form.questions.map((que: any) => (
                 <Question
                   key={que.qid}
+                  id={que.qid}
                   content={que.content}
                   user={que.user}
                   answers={que.answers}
