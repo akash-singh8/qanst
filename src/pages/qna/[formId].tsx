@@ -2,8 +2,11 @@ import { useRouter } from "next/router";
 import style from "@/styles/Form.module.css";
 import Question from "@/components/Question";
 import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import userState from "@/recoil/user";
 
 const Form = () => {
+  const user = useRecoilValue(userState);
   const router = useRouter();
   const formId = router.query.formId;
   const [form, setForm] = useState<any>();
@@ -23,6 +26,31 @@ const Form = () => {
 
     if (formId) getForm();
   }, [formId]);
+
+  const postQuestion = async () => {
+    const questionInput = document.querySelector(
+      `.${style.input} input`
+    ) as HTMLInputElement;
+
+    const post = await fetch("http://localhost:3000/api/question", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        question: questionInput.value,
+        formId: formId,
+        userId: user.email,
+      }),
+    });
+
+    if (post.status !== 201) {
+      const data = await post.json();
+      alert(data.message);
+    }
+
+    questionInput.value = "";
+  };
 
   return (
     <main className={style.form}>
@@ -54,7 +82,7 @@ const Form = () => {
               <div className={style.input}>
                 <img src="/question.svg" alt="ask question" />
                 <input type="text" placeholder="Ask a question" />
-                <button>post</button>
+                <button onClick={postQuestion}>post</button>
               </div>
             </div>
           </>
