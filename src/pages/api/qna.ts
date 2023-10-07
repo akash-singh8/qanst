@@ -43,7 +43,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         },
         include: {
           host: true,
-          questions: true,
+          questions: {
+            include: {
+              user: true,
+              votes: true,
+              answers: {
+                include: {
+                  user: true,
+                },
+              },
+            },
+          },
         },
       });
 
