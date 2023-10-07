@@ -86,3 +86,15 @@
 .input input {
   width: 100%;
 }
+
+.loading {
+  text-align: center;
+  width: 100%;
+  margin-top: 22vh;
+}
+
+.loading img {
+  opacity: 0.9;
+  width: 118px;
+  transform: rotateY(180deg) rotateZ(270deg);
+}

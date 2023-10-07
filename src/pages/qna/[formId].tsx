@@ -22,33 +22,41 @@ const Form = () => {
 
   return (
     <main className={style.form}>
-      <div className={style.head}>
-        <img src={form?.host?.pictureUrl} alt="user" />
-        <div className={style.detail}>
-          <p>{new Date(form?.createdAt).toDateString()}</p>
-          <h1>{form?.title}</h1>
-        </div>
-      </div>
+      {form ? (
+        <>
+          <div className={style.head}>
+            <img src={form?.host?.pictureUrl} alt="user" />
+            <div className={style.detail}>
+              <p>{new Date(form?.createdAt).toDateString()}</p>
+              <h1>{form?.title}</h1>
+            </div>
+          </div>
 
-      <div>
-        {form?.questions?.map((que: any) => (
-          <Question
-            content={que.content}
-            user={que.user}
-            answers={que.answers}
-            date={que.createdAt}
-            votes={que.votes.length}
-          />
-        ))}
-      </div>
+          <div>
+            {form?.questions?.map((que: any) => (
+              <Question
+                content={que.content}
+                user={que.user}
+                answers={que.answers}
+                date={que.createdAt}
+                votes={que.votes.length}
+              />
+            ))}
+          </div>
 
-      <div className={style.input_box}>
-        <div className={style.input}>
-          <img src="/question.svg" alt="ask question" />
-          <input type="text" placeholder="Ask a question" />
-          <button>post</button>
+          <div className={style.input_box}>
+            <div className={style.input}>
+              <img src="/question.svg" alt="ask question" />
+              <input type="text" placeholder="Ask a question" />
+              <button>post</button>
+            </div>
+          </div>
+        </>
+      ) : (
+        <div className={style.loading}>
+          <img src="/loading.svg" alt="loading" />
         </div>
-      </div>
+      )}
     </main>
   );
 };
