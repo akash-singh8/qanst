@@ -30,16 +30,17 @@ const Form = () => {
         form !== 400 ? (
           <>
             <div className={style.head}>
-              <img src={form?.host?.pictureUrl} alt="user" />
+              <img src={form.host?.pictureUrl} alt="user" />
               <div className={style.detail}>
-                <p>{new Date(form?.createdAt).toDateString()}</p>
-                <h1>{form?.title}</h1>
+                <p>{new Date(form.createdAt).toDateString()}</p>
+                <h1>{form.title}</h1>
               </div>
             </div>
 
             <div>
-              {form?.questions?.map((que: any) => (
+              {form.questions.map((que: any) => (
                 <Question
+                  key={que.qid}
                   content={que.content}
                   user={que.user}
                   answers={que.answers}

@@ -23,7 +23,7 @@ const Question = ({ content, user, answers, date, votes }: QueData) => {
 
       <div className={style.answers}>
         {answers?.map((ans: any) => (
-          <div className={style.ans}>
+          <div className={style.ans} key={ans.ansId}>
             <img src={ans.user?.pictureUrl} alt="user" />
             <p>{ans.content}</p>
           </div>
