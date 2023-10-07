@@ -54,6 +54,12 @@
   opacity: 0.6;
 }
 
+.form button:disabled {
+  color: rgb(200, 200, 200);
+  cursor: default;
+  opacity: 1;
+}
+
 .input_box {
   position: absolute;
   left: 0;

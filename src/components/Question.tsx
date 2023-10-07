@@ -17,6 +17,8 @@ const Question = ({ id, content, user, answers, date, votes }: QueData) => {
   const currUser = useRecoilValue(userState);
 
   const postAnswer = async () => {
+    setAnswer("");
+
     const post = await fetch("http://localhost:3000/api/answer", {
       method: "POST",
       headers: {
@@ -33,8 +35,6 @@ const Question = ({ id, content, user, answers, date, votes }: QueData) => {
       const data = await post.json();
       alert(data.message);
     }
-
-    setAnswer("");
   };
 
   return (
@@ -67,7 +67,9 @@ const Question = ({ id, content, user, answers, date, votes }: QueData) => {
             setAnswer(e.target.value);
           }}
         />
-        <button onClick={postAnswer}>post</button>
+        <button onClick={postAnswer} disabled={answer ? false : true}>
+          post
+        </button>
       </div>
     </div>
   );
