@@ -98,3 +98,11 @@
   width: 118px;
   transform: rotateY(180deg) rotateZ(270deg);
 }
+
+.badrequest {
+  text-align: center;
+}
+
+.badrequest img {
+  width: 50%;
+}
