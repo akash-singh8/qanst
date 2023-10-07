@@ -1,23 +1,45 @@
 import { useRouter } from "next/router";
 import style from "@/styles/Form.module.css";
 import Question from "@/components/Question";
+import { useEffect, useState } from "react";
 
 const Form = () => {
   const router = useRouter();
   const formId = router.query.formId;
+  const [form, setForm] = useState<any>();
+
+  useEffect(() => {
+    async function getForm() {
+      const form = await fetch(`http://localhost:3000/api/qna?fid=${formId}`);
+
+      const data = await form.json();
+
+      setForm(data);
+    }
+
+    if (formId) getForm();
+  }, [formId]);
 
   return (
     <main className={style.form}>
       <div className={style.head}>
-        <img src="/favicon.ico" alt="user" />
+        <img src={form?.host?.pictureUrl} alt="user" />
         <div className={style.detail}>
-          <p>3, Octoer 2023</p>
-          <h1>QnA Title</h1>
+          <p>{new Date(form?.createdAt).toDateString()}</p>
+          <h1>{form?.title}</h1>
         </div>
       </div>
 
       <div>
-        <Question />
+        {form?.questions?.map((que: any) => (
+          <Question
+            content={que.content}
+            user={que.user}
+            answers={que.answers}
+            date={que.createdAt}
+            votes={que.votes.length}
+          />
+        ))}
       </div>
 
       <div className={style.input_box}>

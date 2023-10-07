@@ -1,39 +1,33 @@
 import style from "@/styles/Question.module.css";
 
-const Question = () => {
+type QueData = {
+  content: string;
+  user: any;
+  answers: any;
+  date: string;
+  votes: number;
+};
+
+const Question = ({ content, user, answers, date, votes }: QueData) => {
   return (
     <div className={style.question}>
-      <img src="/cross.svg" alt="temp" className={style.pic} />
+      <img src={user?.pictureUrl} alt="temp" className={style.pic} />
 
       <div className={style.detail}>
-        <p>question text</p>
+        <p>{content}</p>
         <div className={style.votes}>
           <img src="/vote-up.svg" alt="vote" />
-          <p>49</p>
+          <p>{votes}</p>
         </div>
       </div>
 
       <div className={style.answers}>
-        <div className={style.ans}>
-          <p>o</p>
-          <p>answer text</p>
-        </div>
-        <div className={style.ans}>
-          <p>o</p>
-          <p>answer text</p>
-        </div>
-        <div className={style.ans}>
-          <p>o</p>
-          <p>answer text</p>
-        </div>
-        <div className={style.ans}>
-          <p>o</p>
-          <p>answer text</p>
-        </div>
-        <div className={style.ans}>
-          <p>o</p>
-          <p>answer text</p>
-        </div>
+        {answers?.map((ans: any) => (
+          <div className={style.ans}>
+            <img src={ans.user?.pictureUrl} alt="user" />
+            <p>{ans.content}</p>
+          </div>
+        ))}
       </div>
 
       <div className={style.ans_input}>
