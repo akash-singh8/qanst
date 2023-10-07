@@ -1,10 +1,12 @@
 import style from "@/styles/Popup.module.css";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import userState from "@/recoil/user";
 import popState from "@/recoil/popup";
 import { useEffect } from "react";
 
 const Popup = () => {
   const setPopup = useSetRecoilState(popState);
+  const user = useRecoilValue(userState);
 
   useEffect(() => {
     const cross = document.querySelector(`.${style.cross}`);
@@ -51,7 +53,7 @@ const Popup = () => {
         },
         body: JSON.stringify({
           title: title?.value,
-          email: "developer.akash8@gmail.com",
+          email: user.email,
         }),
       });
 
