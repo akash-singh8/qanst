@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import voteSchema from "@/validation/vote";
-import { prisma } from "./user";
+import { prisma } from "./qna";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {

@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next/types";
 import validateUUID from "@/validation/uuid";
 import validateForm from "@/validation/form";
-import { prisma } from "./user";
+import { PrismaClient } from "@prisma/client";
+export const prisma = new PrismaClient();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
