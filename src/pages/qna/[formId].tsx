@@ -28,9 +28,21 @@ const Form = () => {
   }, [formId]);
 
   const postQuestion = async () => {
-    const questionInput = document.querySelector(
-      `.${style.input} input`
-    ) as HTMLInputElement;
+    const queElement = document.querySelector(
+      `.${style.input}`
+    ) as HTMLDivElement;
+    const queInput = queElement.querySelector("input") as HTMLInputElement;
+    const queButton = queElement.querySelector("button") as HTMLButtonElement;
+
+    queButton.disabled = true;
+    queButton.innerText = "....";
+
+    const loadingId = setInterval(() => {
+      queButton.innerText += ".";
+      if (queButton.innerText.length > 5) {
+        queButton.innerText = ".";
+      }
+    }, 200);
 
     const post = await fetch("http://localhost:3000/api/question", {
       method: "POST",
@@ -38,7 +50,7 @@ const Form = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        question: questionInput.value,
+        question: queInput.value,
         formId: formId,
         userId: user.email,
       }),
@@ -49,7 +61,10 @@ const Form = () => {
       alert(data.message);
     }
 
-    questionInput.value = "";
+    clearInterval(loadingId);
+    queButton.innerText = "post";
+    queButton.disabled = false;
+    queInput.value = "";
   };
 
   return (
