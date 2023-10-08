@@ -4,10 +4,21 @@ import authState from "@/recoil/auth";
 import popState from "@/recoil/popup";
 import { signIn } from "next-auth/react";
 import Popup from "@/components/Popup";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const auth = useRecoilValue(authState);
   const [popup, setPopup] = useRecoilState(popState);
+  const router = useRouter();
+
+  const joinQnA = () => {
+    const qnaId = document.querySelector(
+      `.${style.join} input`
+    ) as HTMLInputElement;
+    router.push(`/qna/${qnaId.value}`);
+
+    qnaId.value = "";
+  };
 
   return (
     <>
@@ -35,7 +46,7 @@ export default function Home() {
 
               <div className={style.join}>
                 <input type="text" placeholder="Enter id to join QnA" />
-                <button>join</button>
+                <button onClick={joinQnA}>join</button>
               </div>
             </div>
           ) : (
