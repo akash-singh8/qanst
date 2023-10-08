@@ -13,7 +13,7 @@
   width: 90vw;
 }
 
-.footer > img {
+.image {
   height: 52px;
 }
 
@@ -22,7 +22,7 @@
 }
 
 .social {
-  margin-left: 18px;
+  margin-left: 20px;
   width: 24px;
   transition: transform 0.2s ease-in-out;
 }

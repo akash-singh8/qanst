@@ -14,5 +14,6 @@
 }
 
 .nav img {
-  height: 70%;
+  height: 48px;
+  margin-bottom: -2px;
 }

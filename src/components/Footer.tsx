@@ -1,9 +1,12 @@
 import style from "@/styles/Footer.module.css";
+import Link from "next/link";
 
 const Footer = () => {
   return (
     <footer className={style.footer}>
-      <img src="/logo.png" alt="Qanst" />
+      <Link href={"/"}>
+        <img src="/logo.png" alt="Qanst" className={style.image} />
+      </Link>
 
       <div>
         <a href="https://github.com/akash-singh8/qanst" target="_blank">

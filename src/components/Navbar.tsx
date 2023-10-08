@@ -3,6 +3,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import authState from "@/recoil/auth";
 import userState from "@/recoil/user";
 import { useSetRecoilState } from "recoil";
+import Link from "next/link";
 
 const Navbar = () => {
   const session = useSession();
@@ -17,7 +18,9 @@ const Navbar = () => {
 
   return (
     <nav className={style.nav}>
-      <img src="/logo.png" alt="Qanst" />
+      <Link href={"/"}>
+        <img src="/logo.png" alt="Qanst" />
+      </Link>
       {session.data ? (
         <button
           className="button"
