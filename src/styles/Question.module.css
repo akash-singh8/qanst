@@ -6,11 +6,12 @@
 }
 
 .pic {
+  border: 2px solid #eeeeee;
   border-radius: 50%;
-  width: 40px;
+  width: 44px;
   position: absolute;
-  top: 11px;
-  left: -21px;
+  top: 10px;
+  left: -20px;
 }
 
 .detail {
@@ -53,9 +54,9 @@
   display: flex;
   flex-direction: column;
   font-size: 15px;
-  row-gap: 8px;
+  row-gap: 14px;
   padding: 16px 22px;
-  max-height: 98px;
+  max-height: 148px;
   overflow-y: scroll;
 }
 
@@ -70,7 +71,18 @@
 
 .ans {
   display: flex;
-  column-gap: 14px;
+  column-gap: 12px;
+}
+
+.ans img {
+  border-radius: 50%;
+  height: 32px;
+  width: 32px;
+}
+
+.ans p {
+  font-size: 14px;
+  letter-spacing: 0.3px;
 }
 
 .ans_input {
