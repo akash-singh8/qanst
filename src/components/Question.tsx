@@ -17,6 +17,27 @@ const Question = ({ id, content, user, answers, date, votes }: QueData) => {
   const [vote, setVote] = useState(false);
   const currUser = useRecoilValue(userState);
 
+  useEffect(() => {
+    const voteIndex = votes.findIndex(
+      (vote: any) => vote.userId === currUser.email
+    );
+
+    if (voteIndex !== -1) {
+      setVote(true);
+      const voteElement = document.querySelector(
+        `#Que_${votes[voteIndex].questionId.split("-")[4]} .${style.votes}`
+      ) as HTMLElement;
+
+      const voteSvg = voteElement.querySelector("svg") as SVGElement;
+
+      voteSvg.style.fill = "#ff4141aa";
+      voteSvg.style.stroke = "#ff8181aa";
+      voteSvg.style.transform = "none";
+
+      voteElement.title = "already voted";
+    }
+  }, [votes]);
+
   const postAnswer = async () => {
     setAnswer("");
 
