@@ -13,7 +13,6 @@ type QueData = {
 };
 
 const Question = ({ id, content, user, answers, date, votes }: QueData) => {
-  const [answer, setAnswer] = useState("");
   const [vote, setVote] = useState(false);
   const currUser = useRecoilValue(userState);
 
@@ -39,7 +38,21 @@ const Question = ({ id, content, user, answers, date, votes }: QueData) => {
   }, [votes]);
 
   const postAnswer = async () => {
-    setAnswer("");
+    const ansElement = document.querySelector(
+      `#Que_${id.split("-")[4]} .${style.ans_input}`
+    ) as HTMLDivElement;
+    const ansInput = ansElement.querySelector("input") as HTMLInputElement;
+    const ansButton = ansElement.querySelector("button") as HTMLButtonElement;
+
+    ansButton.disabled = true;
+    ansButton.innerText = "....";
+
+    const loadingId = setInterval(() => {
+      ansButton.innerText += ".";
+      if (ansButton.innerText.length > 5) {
+        ansButton.innerText = ".";
+      }
+    }, 200);
 
     const post = await fetch("http://localhost:3000/api/answer", {
       method: "POST",
@@ -47,7 +60,7 @@ const Question = ({ id, content, user, answers, date, votes }: QueData) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        answer: answer,
+        answer: ansInput.value,
         questionId: id,
         userId: currUser.email,
       }),
@@ -57,6 +70,11 @@ const Question = ({ id, content, user, answers, date, votes }: QueData) => {
       const data = await post.json();
       alert(data.message);
     }
+
+    clearInterval(loadingId);
+    ansButton.innerText = "post";
+    ansButton.disabled = false;
+    ansInput.value = "";
   };
 
   const voteQuestion = async () => {
@@ -122,17 +140,8 @@ const Question = ({ id, content, user, answers, date, votes }: QueData) => {
       </div>
 
       <div className={style.ans_input}>
-        <input
-          type="text"
-          placeholder="write a answer..."
-          value={answer}
-          onChange={(e) => {
-            setAnswer(e.target.value);
-          }}
-        />
-        <button onClick={postAnswer} disabled={answer ? false : true}>
-          post
-        </button>
+        <input type="text" placeholder="write a answer..." />
+        <button onClick={postAnswer}>post</button>
       </div>
     </div>
   );
