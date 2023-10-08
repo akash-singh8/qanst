@@ -5,12 +5,14 @@
 
 .head {
   align-items: center;
-  column-gap: 8px;
+  column-gap: 10px;
   display: flex;
 }
 
 .head > img {
-  width: 40px;
+  border: 2px solid #eeeeee;
+  border-radius: 50%;
+  width: 48px;
 }
 
 .detail p {
@@ -21,8 +23,8 @@
 
 .detail h1 {
   color: #262626;
-  font-weight: 600;
-  font-size: 23px;
+  font-weight: 500;
+  font-size: 22px;
 }
 
 .form input,
