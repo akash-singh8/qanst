@@ -30,7 +30,7 @@ const Navbar = () => {
         <button
           className="button"
           onClick={() => {
-            signIn();
+            signIn("google");
           }}>
           Signin
         </button>

@@ -42,7 +42,7 @@ export default function Home() {
             <button
               className={`button ${style.button}`}
               onClick={() => {
-                signIn();
+                signIn("google");
               }}>
               Get started <span>&#10230;</span>
             </button>
