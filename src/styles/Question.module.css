@@ -30,17 +30,20 @@
   row-gap: 2px;
 }
 
-.votes img {
+.votes svg {
   cursor: pointer;
   width: 28px;
   transition: transform 0.15s ease-in-out;
+  fill: none;
+  stroke: rgb(26, 26, 26);
+  stroke-width: 1px;
 }
 
-.votes img:hover {
+.votes svg:hover {
   transform: translateY(-2px);
 }
 
-.votes img:active {
+.votes svg:active {
   transform: translateY(-4px);
 }
 

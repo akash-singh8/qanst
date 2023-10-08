@@ -74,7 +74,7 @@ const Form = () => {
                   user={que.user}
                   answers={que.answers}
                   date={que.createdAt}
-                  votes={que.votes.length}
+                  votes={que.votes}
                 />
               ))}
             </div>
