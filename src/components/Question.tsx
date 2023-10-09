@@ -2,6 +2,7 @@ import style from "@/styles/Question.module.css";
 import { useRecoilValue } from "recoil";
 import userState from "@/recoil/user";
 import { useEffect, useState } from "react";
+import View from "./View";
 
 type QueData = {
   id: string;
@@ -111,7 +112,7 @@ const Question = ({ id, content, user, answers, date, votes }: QueData) => {
 
   return (
     <div className={style.question} id={"Que_" + id.split("-")[4]}>
-      <img src={user?.pictureUrl} alt="temp" className={style.pic} />
+      <View user={user} createdAt={date} />
 
       <div className={style.detail}>
         <p>{content}</p>
@@ -133,7 +134,7 @@ const Question = ({ id, content, user, answers, date, votes }: QueData) => {
       <div className={style.answers}>
         {answers?.map((ans: any) => (
           <div className={style.ans} key={ans.ansId}>
-            <img src={ans.user?.pictureUrl} alt="user" />
+            <View user={ans.user} createdAt={ans.createdAt} />
             <p>{ans.content}</p>
           </div>
         ))}

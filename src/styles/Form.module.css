@@ -9,7 +9,7 @@
   display: flex;
 }
 
-.head > img {
+.head > div > img {
   border: 2px solid #eeeeee;
   border-radius: 50%;
   width: 48px;

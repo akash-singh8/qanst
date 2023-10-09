@@ -4,6 +4,7 @@ import Question from "@/components/Question";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import userState from "@/recoil/user";
+import View from "@/components/View";
 
 const Form = () => {
   const user = useRecoilValue(userState);
@@ -73,7 +74,7 @@ const Form = () => {
         form !== 400 ? (
           <>
             <div className={style.head}>
-              <img src={form.host?.pictureUrl} alt="user" />
+              <View user={form.host} createdAt={form.createdAt} />
               <div className={style.detail}>
                 <p>{new Date(form.createdAt).toDateString()}</p>
                 <h1>{form.title}</h1>

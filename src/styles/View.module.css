@@ -1,0 +1,58 @@
+.view {
+  position: relative;
+}
+
+.view img {
+  cursor: pointer;
+}
+
+.box {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  border-radius: 18px;
+  border-top-left-radius: 0;
+  background-color: white;
+  border: 3px solid #eee;
+  display: none;
+  position: absolute;
+  top: 28px;
+  left: 10px;
+  padding: 18px 20px;
+  min-width: 220px;
+  max-width: 300px;
+  z-index: 20;
+}
+
+.user {
+  display: flex;
+  column-gap: 8px;
+}
+
+.user img {
+  height: 58px;
+  width: 58px;
+  border-radius: 8px;
+  border: 2px solid #eeeeee;
+}
+
+.user p {
+  font-size: 17px;
+  font-weight: 500;
+  padding-top: 5px;
+}
+
+.time {
+  margin-top: 14px;
+}
+
+.time h2 {
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  margin-bottom: 4px;
+}
+
+.time p {
+  color: rgb(72, 72, 72);
+  font-size: 13px;
+  margin: 2px 0;
+}
