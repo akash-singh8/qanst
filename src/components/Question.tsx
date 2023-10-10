@@ -25,7 +25,7 @@ const Question = ({ id, content, user, answers, date, votes }: QueData) => {
     if (voteIndex !== -1) {
       setVote(true);
       const voteElement = document.querySelector(
-        `#Que_${votes[voteIndex].questionId.split("-")[4]} .${style.votes}`
+        `#Que_${id.split("-")[4]} .${style.votes}`
       ) as HTMLElement;
 
       const voteSvg = voteElement.querySelector("svg") as SVGElement;
@@ -36,7 +36,7 @@ const Question = ({ id, content, user, answers, date, votes }: QueData) => {
 
       voteElement.title = "already voted";
     }
-  }, [votes]);
+  }, [votes, currUser]);
 
   const postAnswer = async () => {
     const ansElement = document.querySelector(
