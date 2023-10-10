@@ -3,6 +3,7 @@ import Question from "@/components/Question";
 import { useRecoilValue } from "recoil";
 import userState from "@/recoil/user";
 import View from "@/components/View";
+import { useRouter } from "next/router";
 
 export async function getServerSideProps(context: any) {
   const formId = context.resolvedUrl.slice(5) as string;
@@ -29,8 +30,24 @@ export async function getServerSideProps(context: any) {
 
 const Form = ({ formId, form }: { formId: string; form: any }) => {
   const user = useRecoilValue(userState);
+  const router = useRouter();
+
+  function checkUser() {
+    if (!user.name) {
+      router.push(
+        `http://localhost:3000/api/auth/signin?callbackUrl=http://localhost:3000/qna/${formId}`
+      );
+      return false;
+    }
+
+    return true;
+  }
 
   const postQuestion = async () => {
+    if (!checkUser()) {
+      return;
+    }
+
     const queElement = document.querySelector(
       `.${style.input}`
     ) as HTMLDivElement;
@@ -92,6 +109,7 @@ const Form = ({ formId, form }: { formId: string; form: any }) => {
                 answers={que.answers}
                 date={que.createdAt}
                 votes={que.votes}
+                checkUser={checkUser}
               />
             ))}
           </div>

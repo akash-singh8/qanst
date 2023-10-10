@@ -11,9 +11,18 @@ type QueData = {
   answers: any;
   date: string;
   votes: any;
+  checkUser: any;
 };
 
-const Question = ({ id, content, user, answers, date, votes }: QueData) => {
+const Question = ({
+  id,
+  content,
+  user,
+  answers,
+  date,
+  votes,
+  checkUser,
+}: QueData) => {
   const [vote, setVote] = useState(false);
   const currUser = useRecoilValue(userState);
 
@@ -39,6 +48,10 @@ const Question = ({ id, content, user, answers, date, votes }: QueData) => {
   }, [votes, currUser]);
 
   const postAnswer = async () => {
+    if (!checkUser()) {
+      return;
+    }
+
     const ansElement = document.querySelector(
       `#Que_${id.split("-")[4]} .${style.ans_input}`
     ) as HTMLDivElement;
@@ -79,6 +92,10 @@ const Question = ({ id, content, user, answers, date, votes }: QueData) => {
   };
 
   const voteQuestion = async () => {
+    if (!checkUser()) {
+      return;
+    }
+
     setVote(true);
     const voteElement = document.querySelector(
       `#Que_${id.split("-")[4]} .${style.votes}`
