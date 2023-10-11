@@ -34,10 +34,14 @@ const Question = ({
   useEffect(() => {
     if (socket) {
       socket.on("receive_answer", (answer: any) => {
-        console.log("Received Answer :", answer);
-
         if (answer.qid === id) {
           setAnswers((prevData: any) => [...prevData, answer]);
+        }
+      });
+
+      socket.on("set_vote", (data: any) => {
+        if (data.qid === id) {
+          handleVote(id, data.uid, true);
         }
       });
     }
@@ -49,20 +53,28 @@ const Question = ({
     );
 
     if (voteIndex !== -1) {
+      handleVote(id, currUser.email as string, false);
+    }
+  }, [votes, currUser]);
+
+  function handleVote(qid: string, uid: string, vote: boolean) {
+    const voteElement = document.querySelector(
+      `#Que_${qid.split("-")[4]} .${style.votes}`
+    ) as HTMLElement;
+    const voteCount = voteElement.querySelector("p") as HTMLParagraphElement;
+    const voteSvg = voteElement.querySelector("svg") as SVGElement;
+
+    if (vote) voteCount.innerText = `${parseInt(voteCount.innerText) + 1}`;
+
+    if (currUser.email === uid) {
       setVote(true);
-      const voteElement = document.querySelector(
-        `#Que_${id.split("-")[4]} .${style.votes}`
-      ) as HTMLElement;
-
-      const voteSvg = voteElement.querySelector("svg") as SVGElement;
-
       voteSvg.style.fill = "#ff4141aa";
       voteSvg.style.stroke = "#ff8181aa";
       voteSvg.style.transform = "none";
 
       voteElement.title = "already voted";
     }
-  }, [votes, currUser]);
+  }
 
   const postAnswer = async () => {
     if (!checkUser()) {
@@ -132,18 +144,18 @@ const Question = ({
       return;
     }
 
-    setVote(true);
-    const voteElement = document.querySelector(
-      `#Que_${id.split("-")[4]} .${style.votes}`
-    ) as HTMLDivElement;
-    const voteCount = voteElement.querySelector("p") as HTMLParagraphElement;
-    const voteSvg = voteElement.querySelector("svg") as SVGElement;
+    const voteCount = document.querySelector(
+      `#Que_${id.split("-")[4]} .${style.votes} p`
+    ) as HTMLParagraphElement;
+    const currVoteCount = voteCount.innerText;
+    voteCount.innerText = "...";
 
-    voteElement.title = "already voted";
-    voteCount.innerText = `${votes.length + 1}`;
-    voteSvg.style.fill = "#ff4141aa";
-    voteSvg.style.stroke = "#ff8181aa";
-    voteSvg.style.transform = "none";
+    const loadingId = setInterval(() => {
+      voteCount.innerText += ".";
+      if (voteCount.innerText.length > 4) {
+        voteCount.innerText = ".";
+      }
+    }, 150);
 
     const post = await fetch("http://localhost:3000/api/vote", {
       method: "POST",
@@ -161,6 +173,20 @@ const Question = ({
       alert(data.message);
       return;
     }
+
+    clearInterval(loadingId);
+    voteCount.innerText = currVoteCount;
+    handleVote(id, currUser.email as string, true);
+
+    const newVote = {
+      qid: id,
+      uid: currUser.email,
+    };
+
+    socket.emit("vote", {
+      vote: newVote,
+      room,
+    });
   };
 
   return (

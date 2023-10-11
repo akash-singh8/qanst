@@ -22,6 +22,10 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       socket.on("post_answer", (data) => {
         socket.to(data.room).emit("receive_answer", data.answer);
       });
+
+      socket.on("vote", (data) => {
+        socket.to(data.room).emit("set_vote", data.vote);
+      });
     });
   }
 
