@@ -23,7 +23,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       });
 
       console.log("New question added :", newQue);
-      return res.status(201).json({ message: "Question added" });
+      return res
+        .status(201)
+        .json({ message: "Question added", qid: newQue.qid });
     } catch (err) {
       console.log(err);
       return res
