@@ -23,7 +23,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       });
 
       console.log("New answer added :", newAns);
-      return res.status(201).json({ message: "Answer added" });
+      return res
+        .status(201)
+        .json({ message: "Answer added", ansId: newAns.ansId });
     } catch (err) {
       console.log(err);
       return res
