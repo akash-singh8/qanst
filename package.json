@@ -16,6 +16,8 @@
     "react": "^18",
     "react-dom": "^18",
     "recoil": "^0.7.7",
+    "socket.io": "^4.7.2",
+    "socket.io-client": "^4.7.2",
     "zod": "^3.22.3"
   },
   "devDependencies": {

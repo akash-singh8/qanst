@@ -4,6 +4,9 @@ import { useRecoilValue } from "recoil";
 import userState from "@/recoil/user";
 import View from "@/components/View";
 import { useRouter } from "next/router";
+import { io } from "socket.io-client";
+import { useEffect, useState } from "react";
+let socket: any;
 
 export async function getServerSideProps(context: any) {
   const formId = context.resolvedUrl.slice(5) as string;
@@ -31,6 +34,29 @@ export async function getServerSideProps(context: any) {
 const Form = ({ formId, form }: { formId: string; form: any }) => {
   const user = useRecoilValue(userState);
   const router = useRouter();
+  const [questions, setQuestions] = useState(form.questions);
+
+  useEffect(() => {
+    console.log("Initializing Socket connections");
+    socketInitializer();
+
+    return () => {
+      socket?.disconnect();
+    };
+  }, []);
+
+  const socketInitializer = async () => {
+    await fetch("/api/socket");
+    socket = io();
+
+    socket.on("connect", () => {
+      socket.emit("join_room", formId.split("-")[4]);
+    });
+
+    socket.on("receive_question", (question: any) => {
+      setQuestions((prevData: any) => [...prevData, question]);
+    });
+  };
 
   function checkUser() {
     if (!user.name) {
@@ -76,8 +102,29 @@ const Form = ({ formId, form }: { formId: string; form: any }) => {
       }),
     });
 
-    if (post.status !== 201) {
-      const data = await post.json();
+    const data = await post.json();
+
+    if (post.status === 201) {
+      const newQue = {
+        qid: data.qid,
+        user: {
+          name: user.name,
+          email: user.email,
+          pictureUrl: user.image,
+        },
+        createdAt: new Date().toString(),
+        content: queInput.value,
+        answer: [],
+        votes: [],
+      };
+
+      socket.emit("post_question", {
+        question: newQue,
+        room: formId.split("-")[4],
+      });
+
+      setQuestions((prevData: any) => [...prevData, newQue]);
+    } else {
       alert(data.message);
     }
 
@@ -100,7 +147,7 @@ const Form = ({ formId, form }: { formId: string; form: any }) => {
           </div>
 
           <div>
-            {form.questions.map((que: any) => (
+            {questions.map((que: any) => (
               <Question
                 key={que.qid}
                 id={que.qid}
