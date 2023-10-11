@@ -3,28 +3,45 @@ import { useRecoilValue } from "recoil";
 import userState from "@/recoil/user";
 import { useEffect, useState } from "react";
 import View from "./View";
+import { socket } from "@/pages/qna/[formId]";
 
 type QueData = {
   id: string;
   content: string;
   user: any;
-  answers: any;
+  ianswers: any;
   date: string;
   votes: any;
   checkUser: any;
+  room: string;
 };
 
 const Question = ({
   id,
   content,
   user,
-  answers,
+  ianswers,
   date,
   votes,
   checkUser,
+  room,
 }: QueData) => {
   const [vote, setVote] = useState(false);
   const currUser = useRecoilValue(userState);
+
+  const [answers, setAnswers] = useState(ianswers);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on("receive_answer", (answer: any) => {
+        console.log("Received Answer :", answer);
+
+        if (answer.qid === id) {
+          setAnswers((prevData: any) => [...prevData, answer]);
+        }
+      });
+    }
+  }, [socket]);
 
   useEffect(() => {
     const voteIndex = votes.findIndex(
@@ -80,8 +97,27 @@ const Question = ({
       }),
     });
 
-    if (post.status !== 201) {
-      const data = await post.json();
+    const data = await post.json();
+
+    if (post.status === 201) {
+      const newAns = {
+        ansId: data.ansId,
+        qid: id,
+        user: {
+          name: currUser.name,
+          pictureUrl: currUser.image,
+        },
+        content: ansInput.value,
+        createdAt: new Date().toString(),
+      };
+
+      socket.emit("post_answer", {
+        answer: newAns,
+        room: room,
+      });
+
+      setAnswers((prevData: any) => [...prevData, newAns]);
+    } else {
       alert(data.message);
     }
 

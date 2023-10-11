@@ -18,6 +18,10 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       socket.on("post_question", (data) => {
         socket.to(data.room).emit("receive_question", data.question);
       });
+
+      socket.on("post_answer", (data) => {
+        socket.to(data.room).emit("receive_answer", data.answer);
+      });
     });
   }
 

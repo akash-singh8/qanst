@@ -4,9 +4,10 @@ import { useRecoilValue } from "recoil";
 import userState from "@/recoil/user";
 import View from "@/components/View";
 import { useRouter } from "next/router";
-import { io } from "socket.io-client";
+import { io, Socket } from "socket.io-client";
 import { useEffect, useState } from "react";
-let socket: any;
+
+export let socket: Socket;
 
 export async function getServerSideProps(context: any) {
   const formId = context.resolvedUrl.slice(5) as string;
@@ -34,7 +35,7 @@ export async function getServerSideProps(context: any) {
 const Form = ({ formId, form }: { formId: string; form: any }) => {
   const user = useRecoilValue(userState);
   const router = useRouter();
-  const [questions, setQuestions] = useState(form.questions);
+  const [questions, setQuestions] = useState(form?.questions);
 
   useEffect(() => {
     console.log("Initializing Socket connections");
@@ -153,10 +154,11 @@ const Form = ({ formId, form }: { formId: string; form: any }) => {
                 id={que.qid}
                 content={que.content}
                 user={que.user}
-                answers={que.answers}
+                ianswers={que.answers}
                 date={que.createdAt}
                 votes={que.votes}
                 checkUser={checkUser}
+                room={formId.split("-")[4]}
               />
             ))}
           </div>
