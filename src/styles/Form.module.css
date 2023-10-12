@@ -95,22 +95,69 @@
   width: 100%;
 }
 
-.loading {
-  text-align: center;
-  width: 100%;
-  margin-top: 22vh;
-}
-
-.loading img {
-  opacity: 0.9;
-  width: 118px;
-  transform: rotateY(180deg) rotateZ(270deg);
-}
-
 .badrequest {
   text-align: center;
 }
 
 .badrequest img {
   width: 50%;
+}
+
+@media only screen and (max-width: 680px) {
+  .form {
+    padding: 20px 18px 80px;
+  }
+
+  .head > div > img {
+    width: 44px;
+  }
+
+  .detail p {
+    font-size: 10px;
+    margin-bottom: 0;
+  }
+
+  .detail h1 {
+    font-size: 20px;
+  }
+
+  .form input,
+  .form button {
+    font-size: 14px;
+  }
+
+  .input {
+    padding: 10px 20px 10px 60px;
+    max-width: 400px;
+  }
+
+  .input img {
+    height: 41px;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  .form {
+    padding: 14px 14px 72px;
+  }
+
+  .head > div > img {
+    width: 40px;
+  }
+
+  .detail p {
+    font-size: 9px;
+  }
+
+  .detail h1 {
+    font-size: 18px;
+  }
+
+  .input {
+    padding: 9px 18px 9px 50px;
+  }
+
+  .input img {
+    height: 39px;
+  }
 }
