@@ -30,3 +30,49 @@
 .social:hover {
   transform: translateY(-2px);
 }
+
+@media only screen and (max-width: 780px) {
+  .footer {
+    padding: 0 32px;
+    height: 94px;
+  }
+
+  .image {
+    height: 46px;
+  }
+
+  .social {
+    width: 22px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .footer {
+    padding: 0 28px;
+    height: 84px;
+  }
+
+  .image {
+    height: 44px;
+  }
+
+  .social {
+    width: 20px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .footer {
+    padding: 0 26px;
+    height: 80px;
+  }
+
+  .image {
+    height: 38px;
+  }
+
+  .social {
+    margin-left: 16px;
+    width: 18px;
+  }
+}
