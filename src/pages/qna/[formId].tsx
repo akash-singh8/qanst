@@ -38,12 +38,14 @@ const Form = ({ formId, form }: { formId: string; form: any }) => {
   const [questions, setQuestions] = useState(form?.questions);
 
   useEffect(() => {
-    console.log("Initializing Socket connections");
-    socketInitializer();
+    if (formId) {
+      console.log("Initializing Socket connections");
+      socketInitializer();
 
-    return () => {
-      socket?.disconnect();
-    };
+      return () => {
+        socket?.disconnect();
+      };
+    }
   }, []);
 
   const socketInitializer = async () => {
