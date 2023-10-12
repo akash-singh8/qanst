@@ -56,3 +56,63 @@
   font-size: 13px;
   margin: 2px 0;
 }
+
+@media only screen and (max-width: 680px) {
+  .box {
+    max-width: 260px;
+    padding: 14px 18px;
+  }
+
+  .user img {
+    height: 48px;
+    width: 48px;
+  }
+
+  .user p {
+    font-size: 16px;
+  }
+
+  .time {
+    margin-top: 12px;
+  }
+
+  .time h2 {
+    font-size: 13px;
+  }
+
+  .time p {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .box {
+    max-width: 220px;
+    padding: 10px 14px;
+  }
+
+  .user {
+    column-gap: 6px;
+  }
+
+  .user img {
+    height: 44px;
+    width: 44px;
+  }
+
+  .user p {
+    font-size: 15px;
+  }
+
+  .time {
+    margin-top: 10px;
+  }
+
+  .time h2 {
+    font-size: 12px;
+  }
+
+  .time p {
+    font-size: 11px;
+  }
+}
