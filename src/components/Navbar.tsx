@@ -52,7 +52,7 @@ const Navbar = () => {
   return (
     <nav className={style.nav}>
       <Link href={"/"}>
-        <img src="/logo.png" alt="Qanst" />
+        <img src="/logo.png" alt="Qanst" className={style.logo} />
       </Link>
       {session.data ? (
         <div className={style.logged_user}>

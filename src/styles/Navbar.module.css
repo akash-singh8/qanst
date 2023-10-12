@@ -13,7 +13,7 @@
   width: 90vw;
 }
 
-.nav img {
+.logo {
   height: 48px;
   margin-bottom: -2px;
 }
@@ -75,4 +75,62 @@
 
 .popup button:active {
   background: #e5e5e5;
+}
+
+@media only screen and (max-width: 780px) {
+  .nav {
+    padding: 0 32px;
+    margin-top: 24px;
+  }
+
+  .logo {
+    height: 44px;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .nav {
+    padding: 0 28px;
+  }
+
+  .logo {
+    height: 42px;
+  }
+
+  .user {
+    padding: 9px 44px 9px 18px;
+  }
+
+  .user img {
+    height: 35px;
+  }
+
+  .popup {
+    min-width: 140px;
+    right: 4px;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  .nav {
+    height: 60px;
+    padding: 0 22px;
+  }
+
+  .logo {
+    height: 38px;
+  }
+
+  .user {
+    padding: 8px 42px 8px 16px;
+  }
+
+  .user img {
+    height: 32.5px;
+  }
+
+  .popup {
+    min-width: 140px;
+    right: 4px;
+  }
 }
