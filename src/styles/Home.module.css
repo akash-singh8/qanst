@@ -103,3 +103,119 @@
 .image {
   width: 60% !important;
 }
+
+@media only screen and (max-width: 880px) {
+  .detail {
+    margin-top: 18px;
+  }
+
+  .home img {
+    width: 70% !important;
+  }
+
+  .detail > h1 {
+    font-weight: 600;
+    font-size: 28px;
+  }
+
+  .detail > p {
+    font-size: 22px;
+  }
+}
+
+@media only screen and (max-width: 740px) {
+  .detail {
+    margin-top: 12px;
+  }
+
+  .detail > h1 {
+    font-size: 26px;
+  }
+
+  .detail > p {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .home img {
+    width: 80% !important;
+  }
+
+  .detail {
+    margin-top: 8px;
+  }
+
+  .detail > h1 {
+    font-size: 22px;
+  }
+
+  .button {
+    padding: 8px 22px 8px 24px;
+    font-size: 14px;
+    letter-spacing: 0.4px;
+  }
+
+  .auth p {
+    font-size: 12px;
+    letter-spacing: 1.2px;
+  }
+
+  .join {
+    padding: 9px 24px;
+  }
+
+  .join input,
+  .join button {
+    font-size: 14px;
+  }
+
+  .join input {
+    width: 200px;
+  }
+}
+
+@media only screen and (max-width: 560px) {
+  .home img {
+    width: 80% !important;
+  }
+
+  .detail {
+    margin-top: 8px;
+  }
+
+  .detail > h1 {
+    font-size: 24px;
+    text-align: center;
+    width: 250px;
+  }
+
+  .detail > p {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  .home img {
+    width: 90% !important;
+  }
+
+  .detail > p {
+    line-height: 22px;
+    width: 228px;
+  }
+
+  .join {
+    padding: 9px 20px;
+  }
+
+  .join input {
+    width: 82%;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .home img {
+    width: 100% !important;
+  }
+}
