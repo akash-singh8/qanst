@@ -1,0 +1,30 @@
+.privacy div {
+  margin: 0 0 40px;
+}
+
+.privacy h1 {
+  color: rgb(36, 36, 36);
+  margin-bottom: 4px;
+}
+
+.privacy h2 {
+  border-left: 4px solid rgb(255, 80, 138);
+  color: rgb(36, 36, 36);
+  font-weight: 600;
+  padding-left: 12px;
+  margin: 20px 0 8px;
+}
+
+.privacy p {
+  line-height: 20px;
+  margin: 8px 0;
+}
+
+.privacy strong {
+  font-weight: 500;
+}
+
+.date {
+  color: rgb(255, 80, 138);
+  font-weight: 500;
+}
