@@ -2,13 +2,13 @@ import { Server } from "socket.io";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
-  if (res.socket?.server?.io) {
+  if ((res.socket as any)?.server?.io) {
     console.log("Socket is already running");
   } else {
     console.log("Socket is initializing");
 
-    const io = new Server(res.socket?.server);
-    res.socket.server.io = io;
+    const io = new Server((res.socket as any)?.server);
+    (res.socket as any).server.io = io;
 
     io.on("connection", (socket) => {
       socket.on("join_room", (roomId) => {
