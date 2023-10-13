@@ -26,6 +26,14 @@ export async function getServerSideProps(context: any) {
 
   const data = await response.json();
 
+  data.questions.forEach((question: any) => {
+    question["voteCount"] = question.votes?.length;
+  });
+
+  data.questions?.sort(
+    (que1: any, que2: any) => que2.voteCount - que1.voteCount
+  );
+
   return {
     props: {
       formId,
