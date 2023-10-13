@@ -25,7 +25,7 @@ export const authOptions = {
         console.log("User already added");
       }
 
-      return user;
+      return true;
     },
   },
 };
