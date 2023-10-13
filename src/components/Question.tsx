@@ -99,7 +99,7 @@ const Question = ({
       }
     }, 200);
 
-    const post = await fetch("http://localhost:3000/api/answer", {
+    const post = await fetch("/api/answer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -161,7 +161,7 @@ const Question = ({
       }
     }, 150);
 
-    const post = await fetch("http://localhost:3000/api/vote", {
+    const post = await fetch(`/api/vote`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

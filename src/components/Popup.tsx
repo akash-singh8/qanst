@@ -46,7 +46,7 @@ const Popup = () => {
         }
       }, 250);
 
-      const response = await fetch("http://localhost:3000/api/qna", {
+      const response = await fetch("/api/qna", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -61,7 +61,7 @@ const Popup = () => {
 
       clearInterval(loadingId);
       title.disabled = true;
-      title.value = `http://localhost:3000/qna/${data.formId}`;
+      title.value = `${process.env.NEXT_PUBLIC_BASE_URL}/qna/${data.formId}`;
       navigator.clipboard.writeText(title.value);
       button.innerText = "Link copied!";
     } catch (err) {

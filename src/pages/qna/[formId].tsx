@@ -12,7 +12,9 @@ export let socket: Socket;
 export async function getServerSideProps(context: any) {
   const formId = context.resolvedUrl.slice(5) as string;
 
-  const response = await fetch(`http://localhost:3000/api/qna?fid=${formId}`);
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/qna?fid=${formId}`
+  );
 
   if (!response.ok) {
     return {
@@ -64,7 +66,7 @@ const Form = ({ formId, form }: { formId: string; form: any }) => {
   function checkUser() {
     if (!user.name) {
       router.push(
-        `http://localhost:3000/api/auth/signin?callbackUrl=http://localhost:3000/qna/${formId}`
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/signin?callbackUrl=${process.env.NEXT_PUBLIC_BASE_URL}/qna/${formId}`
       );
       return false;
     }
@@ -93,7 +95,7 @@ const Form = ({ formId, form }: { formId: string; form: any }) => {
       }
     }, 200);
 
-    const post = await fetch("http://localhost:3000/api/question", {
+    const post = await fetch(`/api/question`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
