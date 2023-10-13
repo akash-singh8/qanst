@@ -35,7 +35,9 @@ const Question = ({
     if (socket) {
       socket.on("receive_answer", (answer: any) => {
         if (answer.qid === id) {
-          setAnswers((prevData: any) => [...prevData, answer]);
+          setAnswers((prevData: any) =>
+            prevData ? [...prevData, answer] : [answer]
+          );
         }
       });
 
@@ -128,7 +130,9 @@ const Question = ({
         room: room,
       });
 
-      setAnswers((prevData: any) => [...prevData, newAns]);
+      setAnswers((prevData: any) =>
+        prevData ? [...prevData, newAns] : [newAns]
+      );
     } else {
       alert(data.message);
     }
