@@ -1,13 +1,21 @@
 import style from "@/styles/Home.module.css";
-import { useRecoilValue, useRecoilState } from "recoil";
-import authState from "@/recoil/auth";
+import { useRecoilState } from "recoil";
 import popState from "@/recoil/popup";
-import { signIn } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 import Popup from "@/components/Popup";
 import { useRouter } from "next/router";
 
-export default function Home() {
-  const auth = useRecoilValue(authState);
+export async function getServerSideProps(context: any) {
+  const session = await getSession(context);
+
+  return {
+    props: {
+      session,
+    },
+  };
+}
+
+export default function Home({ session }: { session: any }) {
   const [popup, setPopup] = useRecoilState(popState);
   const router = useRouter();
 
@@ -23,6 +31,7 @@ export default function Home() {
   return (
     <>
       {popup ? <Popup /> : <></>}
+
       <main className={style.home}>
         <div className={style.detail}>
           <h1>Transform Questions into Conversations</h1>
@@ -32,7 +41,7 @@ export default function Home() {
             form creation, and shared insights.
           </p>
 
-          {auth ? (
+          {session ? (
             <div className={style.auth}>
               <button
                 className={`button ${style.button}`}
@@ -60,7 +69,11 @@ export default function Home() {
           )}
         </div>
 
-        <img src="/home.png" alt="home" className={auth ? style.image : ""} />
+        <img
+          src="/home.png"
+          alt="home"
+          className={session ? style.image : ""}
+        />
       </main>
     </>
   );
