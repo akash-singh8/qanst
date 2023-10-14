@@ -1,11 +1,11 @@
-# <img src="https://github.com/akash-singh8/qanst/assets/85285176/407a3565-ce3a-417d-91d6-ee1f1e9bc29b" width="48px" style="margin-bottom:-12px"> Qanst
-
+# <img src="https://github.com/akash-singh8/qanst/assets/85285176/51aea9aa-8c89-430d-8b2e-3760e9252442" width="148px" >
 
 Qanst is a collaborative Q&A platform that empowers curiosity, connects minds, and facilitates meaningful conversations. Create insightful forms, spark engaging discussions, and explore a world of knowledge together.
 
 ## Table of Contents
 
 - [Features](#features)
+- [Screenshots](#screenshots)
 - [Getting Started](#getting-started)
 - [Contributing](#contributing)
 - [License](#license)
@@ -15,7 +15,16 @@ Qanst is a collaborative Q&A platform that empowers curiosity, connects minds, a
 - **Form Creation:** Easily create and customize forms to gather insights and questions.
 - **Collaborative Inquiry:** Engage in collaborative discussions with users to explore diverse perspectives.
 - **Shared Wisdom:** Build a repository of shared knowledge through questions and answers.
-- **User Profiles:** Customize your profile, track your contributions, and connect with like-minded individuals.
+
+## Screenshots
+![Qanst-Home](https://github.com/akash-singh8/qanst/assets/85285176/1ff838a4-7334-4d7e-b10b-a58e7b91a739)
+
+![image](https://github.com/akash-singh8/qanst/assets/85285176/f1e0b662-f37c-40bd-b290-c218c33caf6b)
+
+![image](https://github.com/akash-singh8/qanst/assets/85285176/e858c06e-7bd8-491a-8a53-acba03b25226)
+
+![image](https://github.com/akash-singh8/qanst/assets/85285176/2ea9418f-f98a-4991-ae88-edb9eb8ec2bd)
+
 
 ## Getting Started
 
@@ -29,11 +38,11 @@ To get started with Qanst, follow these steps:
    npm install
    ```
 
-2. **Configuration:** Set up your environment variables and configure the Prisma database connection in the `prisma/schema.prisma` file.
+2. **Configuration:** Set up the environment variables
 
    ```plaintext
-   # .env.local
-   DATABASE_URL="your_database_url"
+   # .env
+   Please have a look at ".env.example"
    ```
 
 3. **Database Migration:** Run database migrations to set up your database schema.
