@@ -1,10 +1,10 @@
 import NextAuth, { User } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
+import GithubProvider from "next-auth/providers/github";
 import { prisma } from "../qna";
 
 export const authOptions = {
   providers: [
-    GoogleProvider({
+    GithubProvider({
       clientId: process.env.NEXT_AUTH_CLIENT_ID!,
       clientSecret: process.env.NEXT_AUTH_CLIENT_SECRET!,
     }),

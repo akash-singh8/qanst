@@ -53,7 +53,7 @@ export default function Home() {
             <button
               className={`button ${style.button}`}
               onClick={() => {
-                signIn("google");
+                signIn("github");
               }}>
               Get started <span>&#10230;</span>
             </button>

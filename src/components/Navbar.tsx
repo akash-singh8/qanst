@@ -78,7 +78,7 @@ const Navbar = () => {
         <button
           className="button"
           onClick={() => {
-            signIn("google");
+            signIn("github");
           }}>
           Signin
         </button>
