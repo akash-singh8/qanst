@@ -35,6 +35,11 @@ const Popup = () => {
       `.${style.container} button`
     ) as HTMLButtonElement;
 
+    if (title.value.length < 5) {
+      alert("Title must be at least 5 characters long")!;
+      return;
+    }
+
     try {
       button.disabled = true;
       button.innerText = "Creating";
