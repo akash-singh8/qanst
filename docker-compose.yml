@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15.0-alpine
+    ports:
+      - 5434:5432
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: qna
+    volumes:
+      - qanst:/var/lib/postgresql/data
+
+  web:
+    build: .
+    ports:
+      - 3000:3000
+    environment:
+      DATABASE_URL: postgres://user:pass@db/qna
+    restart: always
+    depends_on:
+      - db
+
+volumes:
+  qanst:
