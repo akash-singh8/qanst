@@ -2,15 +2,14 @@ FROM node:18.18-alpine
 
 WORKDIR /app
 
-COPY package*.json .
+COPY package*.json ./
 COPY tsconfig.json .
 
 RUN npm install
 
 COPY . .
 
-# The problem with this steps is the we are migrating at build step, not before Docker container is started 
-# RUN npx prisma migrate deploy
+# RUN npx prisma migrate dev => problem: we are migrating at build step, not before Docker container is started 
 
 RUN npm run build
 
