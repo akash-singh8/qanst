@@ -7,6 +7,7 @@ Qanst is a collaborative Q&A platform that empowers curiosity, connects minds, a
 - [Features](#features)
 - [Screenshots](#screenshots)
 - [Getting Started](#getting-started)
+- [Docker setup](#setup-using-docker)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -41,8 +42,8 @@ To get started with Qanst, follow these steps:
 2. **Configuration:** Set up the environment variables
 
    ```plaintext
-   # .env
-   Please have a look at ".env.example"
+   a. Duplicate the ".env.example" file and rename it to ".env".
+   b. Open the ".env" file and configure the environment variables as needed.
    ```
 
 3. **Database Migration:** Run database migrations to set up your database schema.
@@ -59,6 +60,35 @@ To get started with Qanst, follow these steps:
 
 5. **Explore:** Open your browser and navigate to `http://localhost:3000` to start exploring Qanst.
 
+<br>
+
+## Setup using Docker
+
+Make sure you have the [Docker](https://www.docker.com/get-started) installed on your machine!
+
+1. **Installation:** Clone the repository
+
+   ```bash
+   git clone https://github.com/akash-singh8/qanst.git
+   cd qanst
+   ```
+
+2. **Configuration:** Set up the environment variables
+
+   ```plaintext
+   a. Duplicate the ".env.example" file and rename it to ".env".
+   b. Open the ".env" file and configure the environment variables as needed.
+   ```
+
+3. Start Docker Compose:
+
+    ```bash
+    docker-compose up
+    ```
+    
+4. **Explore:** Open your browser and navigate to `http://localhost:3000` to start exploring Qanst.
+
+<br>
 
 ## Contributing
 
